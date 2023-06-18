@@ -12,6 +12,7 @@
     "local": "docker compose -f local/docker-compose.yaml up"
   },
   "devDependencies": {
+    "@types/aws-lambda": "^8.10.119",
     "@types/jest": "^29.5.1",
     "@types/node": "20.1.7",
     "aws-cdk": "2.81.0",
@@ -24,6 +25,7 @@
   "dependencies": {
     "@prisma/client": "^4.15.0",
     "aws-cdk-lib": "2.81.0",
+    "aws-lambda": "^1.0.7",
     "constructs": "^10.0.0",
     "source-map-support": "^0.5.21"
   },
