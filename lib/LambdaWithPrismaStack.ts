@@ -10,6 +10,7 @@ export class LambdaWithPrismaStack extends Stack {
     super(scope, id, props);
 
     const bundledLayerVersion = new LayerVersion(this, 'BundledLayerVersion', {
+      compatibleRuntimes: [Runtime.NODEJS_18_X],
       code: Code.fromAsset('src/prisma-layer', {
         bundling: {
           image: DockerImage.fromBuild('src/prisma-layer'),
@@ -30,6 +31,16 @@ export class LambdaWithPrismaStack extends Stack {
           ],
         },
       }),
+    });
+
+    const getUsersLambda = new NodejsFunction(this, 'GetUsers', {
+      entry: 'src/lambda/getUsers.ts',
+      handler: 'handler',
+      runtime: Runtime.NODEJS_18_X,
+      layers: [bundledLayerVersion],
+      bundling: {
+        externalModules: ['/opt/client'],
+      },
     });
   }
 }
